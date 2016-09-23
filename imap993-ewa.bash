@@ -9,3 +9,14 @@ if test $check == 0 ; then
 else
  exit 1
 fi
+
+#
+health monitor imap993-ewa-bash 
+  strict-retry-on-server-err-resp 
+  interval 30 
+  method external program imap993-ewa.bash
+#
+!
+slb service-group TEWA-IMAPS tcp
+ health-check imap993-ewa-bash
+ 
